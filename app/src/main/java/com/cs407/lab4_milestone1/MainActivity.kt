@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         withContext(Dispatchers.Main){
             startButton.text = getString(R.string.start)
+            progressText.text = "Download Complete"
         }
     }
 
@@ -83,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         val startButton = findViewById<Button>(R.id.start)
         job?.cancel()
         startButton.text = getString(R.string.start)
-        progressText.text = "Download Progress 0%"
+        progressText.text = getString(R.string.progressTextCancel)
 
     }
 
