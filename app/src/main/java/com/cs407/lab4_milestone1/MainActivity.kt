@@ -20,17 +20,19 @@ class MainActivity : AppCompatActivity() {
     private var job : Job? = null
     private var isPaused = false
     private lateinit var progressText: TextView
+    private lateinit var pauseResumeTog: Switch
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val startButton = findViewById<Button>(R.id.start)
         val stopButton = findViewById<Button>(R.id.stop)
-        val pauseResumeTog = findViewById<Switch>(R.id.toggle)
+        pauseResumeTog = findViewById<Switch>(R.id.toggle)
         progressText = findViewById(R.id.progressText)
 
         startButton.setOnClickListener {
             if(job == null || job?.isCompleted == true) {
+                startButton.text = getString(R.string.download)
                 startDownload(it)
             }
         }
@@ -61,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             delay(1000)
 
             withContext(Dispatchers.Main){
-                Log.d(TAG, "Download Progress $downloadProgress%")
+                Log.d(TAG, "Download Progress ${downloadProgress}%")
                 progressText.text = "Download Progress $downloadProgress%"
             }
 
@@ -70,6 +72,8 @@ class MainActivity : AppCompatActivity() {
         withContext(Dispatchers.Main){
             startButton.text = getString(R.string.start)
             progressText.text = "Download Complete"
+            isPaused = false
+            pauseResumeTog.isChecked = false
         }
     }
 
