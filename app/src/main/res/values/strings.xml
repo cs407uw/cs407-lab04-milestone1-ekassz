@@ -3,6 +3,5 @@
     <string name="start">START</string>
     <string name="stop">STOP</string>
     <string name="download">DOWNLOADING...</string>
-    <string name="progressText">Download Progress 0%</string>
     <string name="progressTextCancel">Download Cancelled</string>
 </resources>
