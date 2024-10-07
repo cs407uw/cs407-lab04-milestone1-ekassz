@@ -63,23 +63,24 @@ class MainActivity : AppCompatActivity() {
             while (isPaused){
                 delay(100)
             }
-            delay(1000)
 
             withContext(Dispatchers.Main){
-                progressText.text = "Download Progress $downloadProgress%"
+                progressText.text = getString(R.string.progressText).replace("{percentage}", downloadProgress.toString())
+
             }
+            delay(1000)
 
         }
 
         withContext(Dispatchers.Main){
             startButton.text = getString(R.string.start)
             progressText.text = "Download Complete"
-            delay(1000)
-            recreate()
+
         }
     }
 
     fun startDownload(view: View){
+        if (job?.isActive == true) return
         job = CoroutineScope(Dispatchers.Default).launch {
             mockFileDownLoader()
         }
@@ -87,10 +88,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun stopDownload(view:View){
-        val startButton = findViewById<Button>(R.id.start)
         job?.cancel()
-        startButton.text = getString(R.string.start)
+        val startButton = findViewById<Button>(R.id.start)
         progressText.text = getString(R.string.progressTextCancel)
+        startButton.text = getString(R.string.start)
 
     }
 
