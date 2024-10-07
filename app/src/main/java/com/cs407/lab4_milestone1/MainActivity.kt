@@ -89,6 +89,7 @@ class MainActivity : AppCompatActivity() {
     fun stopDownload(view:View){
         val startButton = findViewById<Button>(R.id.start)
         job?.cancel()
+        job = null
         startButton.text = getString(R.string.start)
         progressText.text = getString(R.string.progressTextCancel)
 
