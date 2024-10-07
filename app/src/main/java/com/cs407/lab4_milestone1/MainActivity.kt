@@ -59,14 +59,13 @@ class MainActivity : AppCompatActivity() {
 
         for(downloadProgress in 0..100 step 10){
             if(job?.isCancelled == true) return
-
             while (isPaused){
                 delay(100)
             }
+            Log.d(TAG, "Download Progress ${downloadProgress}%")
             delay(1000)
 
             withContext(Dispatchers.Main){
-                Log.d(TAG, "Download Progress ${downloadProgress}%")
                 progressText.text = "Download Progress $downloadProgress%"
             }
 
@@ -87,10 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun stopDownload(view:View){
-        val startButton = findViewById<Button>(R.id.start)
         job?.cancel()
-        job = null
-        startButton.text = getString(R.string.start)
         progressText.text = getString(R.string.progressTextCancel)
 
     }
