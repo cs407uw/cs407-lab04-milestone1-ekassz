@@ -59,14 +59,13 @@ class MainActivity : AppCompatActivity() {
 
         for(downloadProgress in 0..100 step 10){
             if(job?.isCancelled == true) return
-
+            Log.d(TAG, "Download Progress ${downloadProgress}%")
             while (isPaused){
                 delay(100)
             }
             delay(1000)
 
             withContext(Dispatchers.Main){
-                Log.d(TAG, "Download Progress ${downloadProgress}%")
                 progressText.text = "Download Progress $downloadProgress%"
             }
 
