@@ -72,8 +72,7 @@ class MainActivity : AppCompatActivity() {
         withContext(Dispatchers.Main){
             startButton.text = getString(R.string.start)
             progressText.text = "Download Complete"
-            isPaused = false
-            pauseResumeTog.isChecked = false
+
         }
     }
 
