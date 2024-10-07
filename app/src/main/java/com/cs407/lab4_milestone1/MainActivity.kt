@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         pauseResumeTog = findViewById<Switch>(R.id.toggle)
         progressText = findViewById(R.id.progressText)
 
+        progressText.visibility = View.GONE
+
         startButton.setOnClickListener {
             if(job == null || job?.isCompleted == true) {
                 startButton.text = getString(R.string.download)
@@ -51,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         val startButton = findViewById<Button>(R.id.start)
 
         withContext(Dispatchers.Main){
+            progressText.visibility = View.VISIBLE
             startButton.text = getString(R.string.download)
         }
 
